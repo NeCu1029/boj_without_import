@@ -30,3 +30,26 @@ class deque:
         self.le += 1
         self.le %= self.size
         return self.arr[self.le]
+
+
+input = open(0).readline
+
+n = int(input())
+a = tuple(map(int, input().split()))
+
+q = deque(n + 5)
+for i in range(1, n + 1):
+    if a[-i] == 1:
+        q.appendleft(i)
+    elif a[-i] == 3:
+        q.append(i)
+    else:
+        x = q.popleft()
+        q.appendleft(i)
+        q.appendleft(x)
+
+l, r = q.le, q.ri
+if l > r:
+    r += n + 5
+for i in range(l + 1, r):
+    print(q.arr[i % (n + 5)], end=" ")
